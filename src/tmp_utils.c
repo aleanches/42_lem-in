@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 13:47:25 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/13 20:55:09 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/14 17:41:25 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void print_lm(t_lm *lm)
 	i = 0;
 	while (i <= lm->rooms_c && i < MAX_ROOMS)
 	{
-		if (lm->rooms[i] && lm->rooms[i]->x > 1)
-			printf ("name = %s | i = %i | x = %i | dest = %i | visit = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->x, lm->rooms[i]->dist, lm->rooms[i]->vis);
+		if (lm->rooms[i])
+			printf ("name = %s | i = %i | x = %i | dest = %i | visit = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->i, lm->rooms[i]->dist, lm->rooms[i]->vis);
 		i++;
 	}
 	printf("\n");

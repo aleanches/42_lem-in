@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 14:37:09 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/13 19:58:23 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/14 20:09:56 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_lm_bfs(t_lm *lm, t_room *start)
 	while (st_cur)
 	{
 		room_cur = (t_room*)ft_lst_pop_back_data(&st_cur);
-		room_cur->vis = 1;
+		room_cur->vis = room_cur->vis == -1 ? 1 : room_cur->vis++;
 		room_cur->dist = dist;
 		ft_lm_push_next_nodes(lm, &st_next, room_cur);
 		if (st_cur == NULL)

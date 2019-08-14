@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/13 21:10:41 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/14 17:09:42 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 typedef struct		s_room
 {
 	int				i;
-	int				x;
 	int				vis;
 	int				dist;
 	int				cord_x;
@@ -62,13 +61,13 @@ int		ft_lm_bfs(t_lm *lm, t_room *start);
 t_route		*ft_lm_get_route(t_lm **lm, t_room *start, t_room *end);
 void	print_route(void *data);
 void 	ft_lm_set_route_s_e(t_lm *lm, t_lst *route, char c);
-void 	ft_lm_set_def_rooms_val(t_lm *lm);
-t_lst 	*ft_lm_get_routes_sr(t_lm **lm);
+void 	ft_lm_close_cross(t_lm *lm);
 void 	ft_lm_close_route_all(t_lm *lm, t_lst *route);
+void 	ft_lm_open_routes_s_e(t_lm *lm, t_lst *routes);
+void 	ft_lm_set_route_s_e(t_lm *lm, t_lst *route, char c);
+t_route		*ft_lm_get_route(t_lm **lm, t_room *start, t_room *end);
+t_lst 	*ft_lm_get_routes_sr(t_lm **lm);
 
-t_lst 	*ft_lm_get_routes_eeee(t_lm **lm);
 
-void 	ft_lm_open_all(t_lm *lm, t_lst *routes);
-void 	ft_lm_close(t_lm *lm);
 
 #endif
