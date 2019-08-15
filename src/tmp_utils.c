@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 13:47:25 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/14 17:41:25 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/15 22:26:18 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void print_lm(t_lm *lm)
 	int i;
 
 	i = 0;
-	while (i <= lm->rooms_c && i < MAX_ROOMS)
+	while (lm->rooms[i])
 	{
-		if (lm->rooms[i])
-			printf ("name = %s | i = %i | x = %i | dest = %i | visit = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->i, lm->rooms[i]->dist, lm->rooms[i]->vis);
+		printf ("name = %s | i = %i | bfs = %i | dest = %i | visit = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->bfs, lm->rooms[i]->dist, lm->rooms[i]->vis);
 		i++;
 	}
 	printf("\n");
@@ -33,12 +32,12 @@ void print_lm(t_lm *lm)
 	printf("ants_c = %i\n\n", lm->ants_c);
 
 	if (lm->room_start)
-		printf ("room_start = %s | i = %i | dest = %i | visit = %i\n", lm->room_start->name, lm->room_start->i, lm->room_start->dist, lm->room_start->vis);
+		printf ("name = %s | i = %i | bfs = %i | dest = %i | visit = %i\n", lm->room_start->name, lm->room_start->i, lm->room_start->bfs, lm->room_start->dist, lm->room_start->vis);
 	else
 		printf("NULL\n");
 
 	if (lm->room_end)
-		printf ("room_end = %s | i = %i | dest = %i | visit = %i\n", lm->room_end->name, lm->room_end->i, lm->room_end->dist, lm->room_end->vis);
+		printf ("name = %s | i = %i | bfs = %i | dest = %i | visit = %i\n", lm->room_end->name, lm->room_end->i, lm->room_end->bfs, lm->room_end->dist, lm->room_end->vis);
 	else
 		printf("NULL\n\n");
 

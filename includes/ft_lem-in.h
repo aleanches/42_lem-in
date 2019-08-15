@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lem-in.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/14 17:09:42 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/15 19:26:35 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_room
 {
 	int				i;
 	int				vis;
+	int				bfs;
 	int				dist;
 	int				cord_x;
 	int				cord_y;
@@ -57,7 +58,7 @@ void print_lm(t_lm *lm);
 int	ft_lm_free(t_lm **lm, int ret_val);
 t_room	*ft_lm_new_room(char **tmp);
 t_room	*ft_lm_add_new_room(t_lm **lm, t_room *room);
-int		ft_lm_bfs(t_lm *lm, t_room *start);
+int		ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end);
 t_route		*ft_lm_get_route(t_lm **lm, t_room *start, t_room *end);
 void	print_route(void *data);
 void 	ft_lm_set_route_s_e(t_lm *lm, t_lst *route, char c);
@@ -67,6 +68,10 @@ void 	ft_lm_open_routes_s_e(t_lm *lm, t_lst *routes);
 void 	ft_lm_set_route_s_e(t_lm *lm, t_lst *route, char c);
 t_route		*ft_lm_get_route(t_lm **lm, t_room *start, t_room *end);
 t_lst 	*ft_lm_get_routes_sr(t_lm **lm);
+void 	ft_lm_set_def_bfs(t_lm *lm);
+void 	ft_lm_set_def_dist(t_lm *lm);
+int ft_lm_find_room_in_st(t_lst *st, int i);
+int ft_lm_find_room_by_i(t_lst *st, int i);
 
 
 

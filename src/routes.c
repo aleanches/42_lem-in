@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   routes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:13:09 by Alexandr          #+#    #+#             */
-/*   Updated: 2019/08/14 20:12:23 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/15 19:33:33 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
 
+void 	ft_lm_set_def_bfs(t_lm *lm)
+{
+	int i;
+	i = 0;
+	while (lm->rooms[i])
+	{
+		lm->rooms[i]->bfs = -1;
+		i++;
+	}
+}
 
 void 	ft_lm_set_def_vis(t_lm *lm)
 {
@@ -57,18 +67,19 @@ t_route		*ft_lm_get_route(t_lm **lm, t_room *start, t_room *end)
 	t_room	*room_cur;
 	int		next_i;
 
+	route = (t_route*)malloc(sizeof(t_route));
 	route->rooms = NULL;
 	route->len = 0;
 	room_cur = end;
 	while (room_cur->i != start->i)
 	{
 		next_i = ft_lm_get_opt_rev(*lm, room_cur);
+		// printf("////%i\n", next_i);
 		if (next_i == -1)
 			return (NULL);///////////!!!!!!!!!!!!!!!
 		if (room_cur->i != start->i && room_cur->i != end->i)
 			room_cur->vis = room_cur->vis == -1 ? 1 : room_cur->vis++;
 		ft_lst_push_front_data(&route->rooms, (void*)(room_cur = (*lm)->rooms[next_i]));
-
 		route->len++;
 	}
 	ft_lst_push_back_data(&route->rooms, (void*)end);
@@ -136,94 +147,48 @@ void 	ft_lm_close_route_all(t_lm *lm, t_lst *route)
 // }
 
 
+void 	print_con(t_lm *lm, t_room *room)
+{
+	int i;
+
+	i = 0;
+	while (lm->mtx[room->i][i])
+	{
+		if (lm->mtx[room->i][i] == '+')
+			printf ("name = %s | i = %i | bfs = %i | dest = %i | visit = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->bfs, lm->rooms[i]->dist, lm->rooms[i]->vis);
+
+		i++;
+	}
+	printf("\n");
+}
+
 t_lst 	*ft_lm_get_routes_sr(t_lm **lm)
 {
 	t_lst	*routes;
 	t_route	*route_cur;
 
-	int i;
-
-	i = 40;
-
-
-	// ft_lm_route_s_e(lm, w1->rooms, '+');
-	// ft_lm_set_def_rooms_val(lm);
-	// ft_lm_bfs(lm, lm->room_start);
-	// w3 = ft_lm_get_route(lm, lm->room_start, lm->room_end);
-	// printf("len = %i\n", w3->len);
-	// ft_lst_iter(w3->rooms, print_route);
-
-	// while (i)
-	// {
-	// 	ft_lm_bfs((*lm), (*lm)->room_start);
-	// 		ft_lm_set_def_rooms_val((*lm));
-	// 		i--;
-	// }
 		
 	routes = NULL;
-	ft_lm_set_def_vis(*lm);
-	ft_lm_set_def_dist(*lm);
-	
-	ft_lm_bfs((*lm), (*lm)->room_start);
-	
-	
-	ft_lm_set_def_vis(*lm);
-	// ft_lm_set_def_dist(*lm);
-	ft_lst_push_back_data(&routes, (void*)(route_cur = ft_lm_get_route(lm, (*lm)->room_start, (*lm)->room_end)));
+	route_cur = NULL;
+
+	ft_lm_bfs((*lm), 1, (*lm)->room_start, (*lm)->room_end);
+	route_cur = ft_lm_get_route(lm, (*lm)->room_start, (*lm)->room_end);
+	printf("----------len = %i\n", route_cur ? route_cur->len : 0);
+	// while (route_cur)
+	// {
+	// 	printf("----------len = %i\n", route_cur ? route_cur->len : 0);
+	// 	// ft_lst_iter(route_cur->rooms, print_route);
+
+	// 	// print_lm(*lm);
+	// 	ft_lm_bfs((*lm), 1, (*lm)->room_start, (*lm)->room_end);
+	// 	// print_lm(*lm);
+	// 	route_cur = ft_lm_get_route(lm, (*lm)->room_start, (*lm)->room_end);
+	// }
+
 	print_lm(*lm);
-	while (route_cur)
-	{
-		printf("----------len = %i\n", route_cur ? route_cur->len : 0);
-		ft_lst_iter(route_cur->rooms, print_route);
 
-		ft_lm_close_route_all((*lm), route_cur->rooms);
-		ft_lm_set_def_vis(*lm);
-		ft_lm_set_def_dist(*lm);
-
-		ft_lm_bfs((*lm), (*lm)->room_start);
-		ft_lm_set_def_vis(*lm);
-		print_lm(*lm);
-		
-		ft_lst_push_back_data(&routes, (void*)(route_cur = ft_lm_get_route(lm, (*lm)->room_start, (*lm)->room_end)));
-	}
+		// printf("----------len = %i\n", route_cur ? route_cur->len : 0);
+		// ft_lst_iter(route_cur->rooms, print_route);
 	return (routes);
 }
 
-
-t_lst 	*ft_lm_get_routes_eeee(t_lm **lm)
-{
-	t_lst	*routes;
-	t_route	*route_cur;
-
-	int i;
-
-	i = 40;
-
-
-	// ft_lm_route_s_e(lm, w1->rooms, '+');
-	// ft_lm_set_def_rooms_val(lm);
-	// ft_lm_bfs(lm, lm->room_start);
-	// w3 = ft_lm_get_route(lm, lm->room_start, lm->room_end);
-	// printf("len = %i\n", w3->len);
-	// ft_lst_iter(w3->rooms, print_route);
-
-	// while (i)
-	// {
-	// 	ft_lm_bfs((*lm), (*lm)->room_start);
-	// 		ft_lm_set_def_rooms_val((*lm));
-	// 		i--;
-	// }
-	routes = NULL;
-	ft_lm_bfs((*lm), (*lm)->room_start);
-	ft_lst_push_back_data(&routes, (void*)(route_cur = ft_lm_get_route(lm, (*lm)->room_start, (*lm)->room_end)));
-	while (route_cur)
-	{
-		printf("----------len = %i\n", route_cur->len);
-		ft_lst_iter(route_cur->rooms, print_route);
-		// ft_lm_set_route_s_e((*lm), route_cur->rooms, '-');
-		ft_lm_close_route_all((*lm), route_cur->rooms);
-		ft_lm_bfs((*lm), (*lm)->room_start);
-		ft_lst_push_back_data(&routes, (void*)(route_cur = ft_lm_get_route(lm, (*lm)->room_start, (*lm)->room_end)));
-	}
-	return (routes);
-}

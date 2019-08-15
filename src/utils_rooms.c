@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 13:46:29 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/14 19:58:12 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/15 19:25:24 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ int ft_lm_get_room_i(t_lm *lm, char *name)
 	return (-1);
 }
 
+int ft_lm_find_room_by_i(t_lst *st, int i)
+{
+	while (st)
+	{
+		if (ROOM(st)->i == i)
+			return (i);
+		st = st->next;
+	}
+	return (-1);
+}
+
 t_room	*ft_lm_new_room(char **tmp)
 {
 	t_room	*new;
@@ -41,6 +52,7 @@ t_room	*ft_lm_new_room(char **tmp)
 		return (NULL);
 	new->i = -1;
 	new->vis = -1;
+	new->bfs = -1;
 	new->dist = -1;
 	new->cord_x = cord_x;
 	new->cord_y = cord_y;

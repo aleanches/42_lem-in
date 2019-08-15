@@ -3,48 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 14:37:09 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/14 20:09:56 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/15 22:34:15 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
 
 
-int		ft_lm_push_next_nodes(t_lm *lm, t_lst **st, t_room *room)
+void	ft_lm_push_next_nodes(t_lm *lm, int no_vis, t_lst **st, t_room *room)
 {
 	int i;
 
 	i = 0;
 	while (lm->mtx[room->i][i])
 	{
-		if (lm->mtx[room->i][i] == '+' && lm->rooms[i]->vis == -1)
+		if (lm->mtx[room->i][i] == '+' && lm->rooms[i]->bfs == -1 &&
+			(no_vis ? lm->rooms[i]->vis == -1 : 1) &&
+			ft_lm_find_room_by_i(*st, i) == -1)
 			ft_lst_push_front_data(st, (void*)(lm->rooms[i]));
 		i++;
 	}
-	return (i);
 }
 
-int		ft_lm_bfs(t_lm *lm, t_room *start)
+int		ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
 {
-	t_lst *st_cur;
-	t_lst *st_next;
+	t_lst	*st_cur;
+	t_lst	*st_next;
 	t_room	*room_cur;
-	int dist;
+	int		dist;
+	int		is_last;
 
-	st_cur = NULL;
-	st_next = NULL;
-	room_cur = NULL;
-	dist = 0;
+	room_cur = (t_room*)(st_next = (st_cur = NULL));
+	is_last = (dist = 0);
+	ft_lm_set_def_bfs(lm);
+	ft_lm_set_def_dist(lm);
 	ft_lst_push_front_data(&st_cur, (void*)start);
 	while (st_cur)
 	{
 		room_cur = (t_room*)ft_lst_pop_back_data(&st_cur);
-		room_cur->vis = room_cur->vis == -1 ? 1 : room_cur->vis++;
-		room_cur->dist = dist;
-		ft_lm_push_next_nodes(lm, &st_next, room_cur);
+		if (room_cur->bfs == -1)
+		{
+			room_cur->bfs = 1;
+			room_cur->dist = dist;
+			ft_lm_push_next_nodes(lm, no_vis, &st_next, room_cur);
+		}
+		if (room_cur->i == end->i)
+			break;
 		if (st_cur == NULL)
 		{
 			st_cur = st_next;
