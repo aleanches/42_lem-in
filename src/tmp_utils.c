@@ -6,11 +6,35 @@
 /*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 13:47:25 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/15 22:26:18 by Alexandr         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:27:07 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
+
+void 	ft_lm_close_route_all(t_lm *lm, t_lst *rooms)
+{
+	int i;
+
+	while (rooms->next)
+	{
+		i = 0;
+		if (lm->room_start->i == ROOM(rooms)->i)
+		{
+			lm->mtx[ROOM(rooms)->i][ROOM(rooms->next)->i] = '-';
+		}
+		else
+		{
+			while (lm->mtx[ROOM(rooms)->i][i])
+			{
+				lm->mtx[ROOM(rooms)->i][i] = '-';
+				i++;
+			}
+		}
+		rooms = rooms->next;
+	}
+}
+
 
 void	print_route(void *data)
 {

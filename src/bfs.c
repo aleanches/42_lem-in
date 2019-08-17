@@ -6,7 +6,7 @@
 /*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 14:37:09 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/15 22:34:15 by Alexandr         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:16:37 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int		ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
 
 	room_cur = (t_room*)(st_next = (st_cur = NULL));
 	is_last = (dist = 0);
-	ft_lm_set_def_bfs(lm);
-	ft_lm_set_def_dist(lm);
+	ft_lm_set_def(lm, 0, 1, 1);
 	ft_lst_push_front_data(&st_cur, (void*)start);
 	while (st_cur)
 	{

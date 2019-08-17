@@ -6,7 +6,7 @@
 /*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/15 18:44:27 by Alexandr         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:06:46 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void 	ft_lm_init(t_lm **lm)
 	ft_bzero((void*)(*lm)->rooms, sizeof(t_room*) * MAX_ROOMS);
 	(*lm)->room_start = NULL;
 	(*lm)->room_end = NULL;
+	(*lm)->routes_a = NULL;
+	(*lm)->routes_b = NULL;
 	(*lm)->mtx = NULL;
-	(*lm)->routes = NULL;
+	(*lm)->input = NULL;
 }
 
 int main()
