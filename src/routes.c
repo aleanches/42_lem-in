@@ -6,7 +6,7 @@
 /*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:13:09 by Alexandr          #+#    #+#             */
-/*   Updated: 2019/08/16 17:22:42 by Alexandr         ###   ########.fr       */
+/*   Updated: 2019/08/17 14:27:02 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_lst 	*ft_lm_get_routes(t_lm **lm, int no_vis)
 		if (route_cur == NULL)
 			break ;
 	}
+	return (routes);
 }
 
 
