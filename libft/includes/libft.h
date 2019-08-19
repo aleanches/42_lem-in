@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:11:24 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/10 13:54:45 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/19 16:33:02 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include "get_next_line.h"
+# include "f_get_next_line.h"
 
 typedef struct			s_lst
 {
@@ -75,6 +76,7 @@ void					ft_memdel(void **ap);
 void					*ft_memmove(void *dst, const void *src, size_t n);
 void					*ft_memrcpy(void *dst, const void *src, size_t n);
 void					*ft_memset(void *buf, int ch, size_t count);
+void					*ft_memdup(void *data, size_t size);
 
 void					ft_putchar_fd(char c, int fd);
 void					ft_putchar(char c);

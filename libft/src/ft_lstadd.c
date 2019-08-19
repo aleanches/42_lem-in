@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_ants.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/09 13:45:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 16:49:13 by vsanta           ###   ########.fr       */
+/*   Created: 2019/04/08 08:23:44 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/19 15:19:51 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lem-in.h"
+#include "f_get_next_line.h"
 
-int ft_lm_set_count_ants(char **line, t_lm **lm)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	int count;
-	if ((*line)[0] && (*line)[0] == '#')
-		return (10);
-	count = ft_atoi((*line));
-	if (count == 0 || ft_is_valid_int(count, (*line)) == 0)
-		ft_lm_put_error(lm, 10);
-	(*lm)->ants_c = count;
-	return (20);
+	new->next = *alst;
+	*alst = new;
 }

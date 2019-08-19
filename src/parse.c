@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:43:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/10 14:15:48 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/19 16:48:16 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	ft_lm_parse_input(t_lm **lm)
 
 	line = NULL;
 	action = 10;
-	while (get_next_line(0, &line))
+	while (f_get_next_line(0, &line))
 	{
+		ft_lst_push_back_data(&((*lm)->input), (void*)line);
 		if (action == 10)
 			action = ft_lm_set_count_ants(&line, lm);
 		else if (action == 20 || action == 21 || action == 22)
 			action = ft_lm_add_room(action, &line, lm);
 		else if (action == 30)
 			action = ft_lm_add_con(&line, lm);
-		ft_str_free(&line, 0);
 	}
 }

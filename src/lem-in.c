@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem-in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/16 17:06:46 by Alexandr         ###   ########.fr       */
+/*   Updated: 2019/08/19 18:08:24 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,21 @@ void 	ft_lm_init(t_lm **lm)
 	(*lm)->input = NULL;
 }
 
+
+void 	ff_print_route(void  *data)
+{
+	printf("%s\n", ((t_room*)data)->name);
+}
+
+void 	ff_print_routes(void  *data)
+{
+	printf("len - %i\n", ((t_route*)data)->len);
+	ft_lst_iter(((t_route*)data)->rooms, ff_print_route);
+}
+
+
+
+
 int main()
 {
 	t_lm *lm;
@@ -57,7 +72,16 @@ int main()
 	
 
 
-	ft_lm_get_routes_sr(&lm);
+	ft_lm_set_routes(lm);
+
+	// ft_lm_get_routes_sr(lm);
+
+
+	ft_lst_iter(lm->routes_a, ff_print_routes);
+
+	printf("-------------\n");
+
+	ft_lst_iter(lm->routes_b, ff_print_routes);
 
 	// ft_lm_get_routes_sr(&lm);
 

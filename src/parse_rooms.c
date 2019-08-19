@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:45:52 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/10 14:27:08 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/19 18:09:16 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int ft_lm_add_room(int action, char **line, t_lm **lm)
 		return (ft_lm_coment_type(line));
 	if((action == 21 && (*lm)->room_start != NULL) ||
 		(action == 22 && (*lm)->room_end != NULL))
-		ft_lm_put_error(lm, ft_str_free(line, action));
+		ft_lm_put_error(lm, action);
 	if ((tmp = ft_strsplit((*line), ' ')) == NULL)
-		ft_lm_put_error(lm, ft_str_free(line, action));
+		ft_lm_put_error(lm, action);
 	if (ft_array_len(tmp) != 3 || ft_lm_get_room_i(*lm, tmp[0]) != -1 ||
 		(new_room = ft_lm_new_room(tmp)) == NULL)
 		return (ft_lm_is_not_room(ft_array_free(&tmp, action), line, lm));
@@ -46,6 +46,5 @@ int ft_lm_add_room(int action, char **line, t_lm **lm)
 		(*lm)->room_end = ft_lm_add_new_room(lm, new_room);
 	else
 		ft_lm_add_new_room(lm, new_room);
-	// printf("add room - %i\n", (*lm)->rooms_c);/////////TEST
 	return (20);
 }
