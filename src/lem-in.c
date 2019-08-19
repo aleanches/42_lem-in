@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 18:08:24 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/19 20:00:32 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,40 @@ void 	ff_print_route(void  *data)
 
 void 	ff_print_routes(void  *data)
 {
-	printf("len - %i\n", ((t_route*)data)->len);
-	ft_lst_iter(((t_route*)data)->rooms, ff_print_route);
+	printf("len = %i | ants = %i\n", ((t_route*)data)->len, ((t_route*)data)->ants);
+	// ft_lst_iter(((t_route*)data)->rooms, ff_print_route);
 }
 
 
 
+
+int ft_lm_put_ants(t_lm *lm, t_lst *routes)
+{
+	int ants;
+	int sum;
+	t_lst *begin;
+
+	ants = lm->ants_c;
+	sum = 0;
+	begin = routes;
+	while (ants > 0)
+	{
+		while (begin)
+		{
+			if (sum > ROUTE(begin)->ants + ROUTE(begin)->len)
+			{
+				ants--;
+				ROUTE(begin)->ants++;
+				if (ants == 0)
+					break;
+			}
+			begin = begin->next;
+		}
+		begin = routes;
+		sum++;
+	}
+	return(ROUTE(routes)->ants + ROUTE(routes)->len);
+}
 
 int main()
 {
@@ -74,13 +102,14 @@ int main()
 
 	ft_lm_set_routes(lm);
 
-	// ft_lm_get_routes_sr(lm);
+	// // ft_lm_get_routes_sr(lm);
 
-
+	
+	printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_a) - 1);
 	ft_lst_iter(lm->routes_a, ff_print_routes);
 
-	printf("-------------\n");
-
+	
+	printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_b) - 1);
 	ft_lst_iter(lm->routes_b, ff_print_routes);
 
 	// ft_lm_get_routes_sr(&lm);

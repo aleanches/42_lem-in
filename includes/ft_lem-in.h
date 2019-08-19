@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 17:37:57 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/19 18:36:30 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define MAX_ROOMS 15000
 # define ROOM(R) ((t_room*)(R->data))
+# define ROUTE(R) ((t_route*)R->data)
 
 typedef struct		s_room
 {
