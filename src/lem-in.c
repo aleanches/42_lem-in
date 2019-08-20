@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 20:00:32 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/20 19:15:48 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ void 	ff_print_route(void  *data)
 void 	ff_print_routes(void  *data)
 {
 	printf("len = %i | ants = %i\n", ((t_route*)data)->len, ((t_route*)data)->ants);
-	// ft_lst_iter(((t_route*)data)->rooms, ff_print_route);
+	ft_lst_iter(((t_route*)data)->rooms, ff_print_route);
 }
-
 
 
 
