@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 20:00:32 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/20 20:21:19 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ int main()
 
 	
 	printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_a) - 1);
-	ft_lst_iter(lm->routes_a, ff_print_routes);
+	// ft_lst_iter(lm->routes_a, ff_print_routes);
 
 	
 	printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_b) - 1);
-	ft_lst_iter(lm->routes_b, ff_print_routes);
+	// ft_lst_iter(lm->routes_b, ff_print_routes);
 
 	// ft_lm_get_routes_sr(&lm);
 
