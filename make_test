@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 ./generator.dms --big-superposition > map1
 time ./test < map1
+=======
+./generator.dms --big-superposition > map2
+time ./test < map2
+>>>>>>> 3a0d20890a82bbc9c1845793c98956608384c87f

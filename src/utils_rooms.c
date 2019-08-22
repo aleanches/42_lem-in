@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 13:46:29 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/16 15:12:53 by Alexandr         ###   ########.fr       */
+/*   Updated: 2019/08/22 21:05:08 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_room	*ft_lm_new_room(char **tmp)
 	new->vis = -1;
 	new->bfs = -1;
 	new->dist = -1;
+	new->only_from_vis = -1;
 	new->cord_x = cord_x;
 	new->cord_y = cord_y;
 	new->name = tmp[0];

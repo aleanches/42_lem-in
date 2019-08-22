@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 13:47:25 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 14:14:17 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/22 21:05:05 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void print_lm(t_lm *lm)
 	i = 0;
 	while (lm->rooms[i])
 	{
-		printf ("name = %s | i = %i | bfs = %i | dest = %i | visit = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->bfs, lm->rooms[i]->dist, lm->rooms[i]->vis);
+		printf ("name = %s | i = %i | bfs = %i | dest = %i | vis = %i | only_from_vis = %i\n", lm->rooms[i]->name, lm->rooms[i]->i, lm->rooms[i]->bfs, lm->rooms[i]->dist, lm->rooms[i]->vis, lm->rooms[i]->only_from_vis);
 		i++;
 	}
 	printf("\n");
@@ -73,41 +73,41 @@ void print_lm(t_lm *lm)
 	// }
 }
 
-t_lst 	*ft_lm_get_routes_sr(t_lm *lm)
-{
-	t_lst	*routes;
-	t_route	*route_cur;
+// t_lst 	*ft_lm_get_routes_sr(t_lm *lm)
+// {
+// 	t_lst	*routes;
+// 	t_route	*route_cur;
 
-	routes = NULL;
-	route_cur = NULL;
-	while (42)
-	{
-		if (route_cur)
-			ft_lm_set_rooms_s_e(lm, route_cur->rooms, '-');
-		ft_lm_bfs(lm, 0, lm->room_start, lm->room_end);
-		route_cur = ft_lm_get_route(lm, lm->room_start, lm->room_end);
-		ft_lst_push_front_data(&routes, (void*)route_cur);
-		if (route_cur == NULL)
-			break ;
-	}
-	ft_lm_open_routes_s_e(lm, routes);
-	ft_lm_close_cross(lm);
-	ft_lm_set_def(lm, 1, 0, 0);
-	ft_lm_bfs(lm, 1, lm->room_start, lm->room_end);
-	route_cur =  ft_lm_get_route(lm, lm->room_start, lm->room_end);
+// 	routes = NULL;
+// 	route_cur = NULL;
+// 	while (42)
+// 	{
+// 		if (route_cur)
+// 			ft_lm_set_rooms_s_e(lm, route_cur->rooms, '-');
+// 		ft_lm_bfs(lm, 0, lm->room_start, lm->room_end);
+// 		route_cur = ft_lm_get_route(lm, lm->room_start, lm->room_end);
+// 		ft_lst_push_front_data(&routes, (void*)route_cur);
+// 		if (route_cur == NULL)
+// 			break ;
+// 	}
+// 	ft_lm_open_routes_s_e(lm, routes);
+// 	ft_lm_close_cross(lm);
+// 	ft_lm_set_def(lm, 1, 0, 0);
+// 	ft_lm_bfs(lm, 1, lm->room_start, lm->room_end);
+// 	route_cur =  ft_lm_get_route(lm, lm->room_start, lm->room_end);
 
-	while (route_cur)
-	{
-		printf("----------len = %i\n", route_cur ? route_cur->len : 0);
-		// ft_lst_iter(route_cur->rooms, print_route);
-		// ft_lm_close_route_all(*lm, route_cur->rooms);
-		ft_lm_bfs(lm, 1, lm->room_start, lm->room_end);
-		route_cur =  ft_lm_get_route(lm, lm->room_start, lm->room_end);
-	}
+// 	while (route_cur)
+// 	{
+// 		printf("----------len = %i\n", route_cur ? route_cur->len : 0);
+// 		// ft_lst_iter(route_cur->rooms, print_route);
+// 		// ft_lm_close_route_all(*lm, route_cur->rooms);
+// 		ft_lm_bfs(lm, 1, lm->room_start, lm->room_end);
+// 		route_cur =  ft_lm_get_route(lm, lm->room_start, lm->room_end);
+// 	}
 
-	// print_lm(*lm);
+// 	// print_lm(*lm);
 
-		// printf("----------len = %i\n", route_cur ? route_cur->len : 0);
-		// ft_lst_iter(route_cur->rooms, print_route);
-	return (routes);
-}
+// 		// printf("----------len = %i\n", route_cur ? route_cur->len : 0);
+// 		// ft_lst_iter(route_cur->rooms, print_route);
+// 	return (routes);
+// }
