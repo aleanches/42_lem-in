@@ -1,2 +1,2 @@
-./generator.dms --big-superposition > map1
-time ./test < map1
+./generator.dms --big-superposition > map2
+time ./test < map2
