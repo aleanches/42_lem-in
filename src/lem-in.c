@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/20 20:21:19 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/22 20:12:00 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,7 @@ void 	ff_print_routes(void  *data)
 
 
 
-int ft_lm_put_ants(t_lm *lm, t_lst *routes)
-{
-	int ants;
-	int sum;
-	t_lst *begin;
 
-	ants = lm->ants_c;
-	sum = 0;
-	begin = routes;
-	while (ants > 0)
-	{
-		while (begin)
-		{
-			if (sum > ROUTE(begin)->ants + ROUTE(begin)->len)
-			{
-				ants--;
-				ROUTE(begin)->ants++;
-				if (ants == 0)
-					break;
-			}
-			begin = begin->next;
-		}
-		begin = routes;
-		sum++;
-	}
-	return(ROUTE(routes)->ants + ROUTE(routes)->len);
-}
 
 int main()
 {

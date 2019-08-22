@@ -6,27 +6,11 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:13:09 by Alexandr          #+#    #+#             */
-/*   Updated: 2019/08/20 20:27:20 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/22 20:21:28 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
-
-void 	ft_lm_set_def(t_lm *lm, int vis, int bfs, int dist)
-{
-	int i;
-	i = 0;
-	while (lm->rooms[i])
-	{
-		if (vis == 1)
-			lm->rooms[i]->vis = -1;
-		if (bfs == 1)
-			lm->rooms[i]->bfs = -1;
-		if (dist == 1)
-			lm->rooms[i]->dist = -1;
-		i++;
-	}
-}
 
 int ft_lm_get_opt_rev(t_lm *lm, t_room *from_room)
 {
@@ -53,8 +37,7 @@ t_route		*ft_lm_get_route(t_lm *lm, t_room *start, t_room *end)
 
 	if ((route = (t_route*)malloc(sizeof(t_route))) == NULL)
 		return (NULL);
-	route->len = 0;
-	route->ants = 0;
+	route->len = (route->ants = 0);
 	route->rooms = NULL;
 	room_cur = end;
 	while (room_cur->i != start->i)
@@ -70,45 +53,6 @@ t_route		*ft_lm_get_route(t_lm *lm, t_room *start, t_room *end)
 	ft_lst_push_back_data(&route->rooms, (void*)end);
 	return (route);
 }
-
-void 	ft_lm_set_rooms_s_e(t_lm *lm, t_lst *rooms, char c)
-{
-	while (rooms && rooms->next)
-	{
-		lm->mtx[ROOM(rooms)->i][ROOM(rooms->next)->i] = c;
-		rooms = rooms->next;
-	}
-}
-
-void 	ft_lm_open_routes_s_e(t_lm *lm, t_lst *routes)
-{
-	while (routes)
-	{
-		ft_lm_set_rooms_s_e(lm, ((t_route*)(routes->data))->rooms, '+');
-		routes = routes->next;
-	}
-}
-
-void 	ft_lm_close_cross(t_lm *lm)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (lm->rooms[i])
-	{
-		j = 0;
-		while (lm->mtx[i][j])
-		{
-			if (lm->mtx[i][j] == '+' &&
-				lm->rooms[i]->vis > 1 && lm->rooms[j]->vis > 1)
-				lm->mtx[i][j] = '-';
-			j++;
-		}
-		i++;
-	}
-}
-
 
 t_lst 	*ft_lm_get_routes(t_lm *lm, int no_vis, int close_rev)
 {

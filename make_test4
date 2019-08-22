@@ -1,0 +1,2 @@
+./generator.dms --big > map4
+time ./test < map4

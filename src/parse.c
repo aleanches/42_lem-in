@@ -6,11 +6,22 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:43:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 16:48:16 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/22 20:07:53 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
+
+int ft_lm_coment_type(char **line)
+{
+	if ((*line)[0] && (*line)[0] == '#' && ft_strcmp((*line), "##start") == 0)
+		return (21);
+	else if ((*line)[0] && (*line)[0] == '#' && ft_strcmp((*line), "##end") == 0)
+		return (22);
+	else if ((*line)[0] && (*line)[0] == '#')
+		return (20);
+	return (0);
+}
 
 int	ft_lm_is_not_room(int action, char **line, t_lm **lm)
 {

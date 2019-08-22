@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/20 20:19:55 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/22 20:12:33 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ void 	ft_lm_set_rooms_s_e(t_lm *lm, t_lst *rooms, char c);
 int 	ft_lm_set_routes(t_lm *lm);
 
 void 	ft_lm_set_def(t_lm *lm, int vis, int bfs, int dist);
+
+int ft_lm_get_room_by_name(t_lm *lm, char *name);
+
+int ft_lm_coment_type(char **line);
+int ft_lm_put_ants(t_lm *lm, t_lst *routes);
 
 
 #endif

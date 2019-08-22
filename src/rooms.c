@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_rooms.c                                      :+:      :+:    :+:   */
+/*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 13:46:29 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/16 15:12:53 by Alexandr         ###   ########.fr       */
+/*   Created: 2019/08/09 13:45:52 by vsanta            #+#    #+#             */
+/*   Updated: 2019/08/22 20:07:12 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
 
-int ft_lm_get_room_i(t_lm *lm, char *name)
+int ft_lm_get_room_by_name(t_lm *lm, char *name)
 {
 	int i;
 	
@@ -65,4 +65,30 @@ t_room	*ft_lm_add_new_room(t_lm **lm, t_room *room)
 	if ((*lm)->rooms_c >= MAX_ROOMS)
 		ft_lm_put_error(lm, 1);
 	return ((*lm)->rooms[room->i = (*lm)->rooms_c++] = room);
+}
+
+int ft_lm_add_room(int action, char **line, t_lm **lm)
+{
+	char **tmp;
+	t_room	*new_room;
+
+	if (ft_lm_coment_type(line) != 0)
+		return (ft_lm_coment_type(line));
+	if((action == 21 && (*lm)->room_start != NULL) ||
+		(action == 22 && (*lm)->room_end != NULL))
+		ft_lm_put_error(lm, action);
+	if ((tmp = ft_strsplit((*line), ' ')) == NULL)
+		ft_lm_put_error(lm, action);
+	if (ft_array_len(tmp) != 3 || ft_lm_get_room_by_name(*lm, tmp[0]) != -1 ||
+		(new_room = ft_lm_new_room(tmp)) == NULL)
+		return (ft_lm_is_not_room(ft_array_free(&tmp, action), line, lm));
+	ft_str_free(&(tmp[1]), ft_str_free(&(tmp[2]), action));
+	free(tmp);
+	if (action == 21)
+		(*lm)->room_start = ft_lm_add_new_room(lm, new_room);
+	else if (action == 22)
+		(*lm)->room_end = ft_lm_add_new_room(lm, new_room);
+	else
+		ft_lm_add_new_room(lm, new_room);
+	return (20);
 }
