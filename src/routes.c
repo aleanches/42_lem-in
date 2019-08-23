@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:13:09 by Alexandr          #+#    #+#             */
-/*   Updated: 2019/08/22 20:21:28 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/23 19:23:05 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ int 	ft_lm_set_routes(t_lm *lm)
 	lm->routes_b = ft_lm_get_routes(lm, 1, 0);
 	return (1);
 }
-

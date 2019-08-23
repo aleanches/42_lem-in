@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/22 20:12:00 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/23 19:41:00 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void 	ft_lm_init(t_lm **lm)
 		ft_lm_put_error(lm, 1);
 	(*lm)->ants_c = 0;
 	(*lm)->rooms_c = 0;
-	ft_bzero((void*)(*lm)->rooms, sizeof(t_room*) * MAX_ROOMS);
+	(*lm)->ants = NULL;
+	ft_bzero((void*)(*lm)->rooms, sizeof(t_room*) * (MAX_ROOMS + 1));
 	(*lm)->room_start = NULL;
 	(*lm)->room_end = NULL;
+	(*lm)->mtx = NULL;
 	(*lm)->routes_a = NULL;
 	(*lm)->routes_b = NULL;
-	(*lm)->mtx = NULL;
 	(*lm)->input = NULL;
 }
 
@@ -49,8 +50,17 @@ void 	ff_print_routes(void  *data)
 }
 
 
+void 	print_ants(t_lm *lm)
+{
+	int i = 0;
 
-
+	while (lm->ants[i])
+	{
+		printf("%i |", (lm->ants[i])->ant_n);
+		i++;
+	}
+	printf("\n");
+}
 
 
 int main()
@@ -78,12 +88,13 @@ int main()
 
 	// // ft_lm_get_routes_sr(lm);
 
+	print_ants(lm);
 	
-	printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_a) - 1);
+	// printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_a) - 1);
 	// ft_lst_iter(lm->routes_a, ff_print_routes);
 
 	
-	printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_b) - 1);
+	// printf("-------------%i\n", ft_lm_put_ants(lm, lm->routes_b) - 1);
 	// ft_lst_iter(lm->routes_b, ff_print_routes);
 
 	// ft_lm_get_routes_sr(&lm);

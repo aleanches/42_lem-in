@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/22 20:12:33 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/23 19:29:04 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # define MAX_ROOMS 15000
 # define ROOM(R) ((t_room*)(R->data))
 # define ROUTE(R) ((t_route*)R->data)
+
+
+typedef struct		s_ant
+{
+	int				ant_n;
+	t_lst			*room_cur;
+}					t_ant;
 
 typedef struct		s_room
 {
@@ -41,12 +48,13 @@ typedef struct		s_lm
 {
 	int				ants_c;
 	int				rooms_c;
+	t_ant			**ants;
 	t_room			*rooms[MAX_ROOMS + 1];
 	t_room			*room_start;
 	t_room			*room_end;
+	char			**mtx;
 	t_lst			*routes_a;
 	t_lst			*routes_b;
-	char			**mtx;
 	t_lst			*input;
 }					t_lm;
 
@@ -88,6 +96,8 @@ int ft_lm_get_room_by_name(t_lm *lm, char *name);
 
 int ft_lm_coment_type(char **line);
 int ft_lm_put_ants(t_lm *lm, t_lst *routes);
+
+t_ant 	**ft_lm_ants_new(t_lm **lm);
 
 
 #endif
