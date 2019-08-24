@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:45:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/23 20:22:51 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/24 18:32:14 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,59 @@ int ft_lm_put_ants(t_lm *lm, t_lst *routes)
 	}
 	return(ROUTE(routes)->ants + ROUTE(routes)->len);
 }
-int ft_lm_get_last_free_ant(t_lm *lm)
-{
-	int i;
 
-	i = 0;
-	while (lm->ants[i])
+
+int	ft_lm_ant_move(t_lm *lm, int ant)
+{
+	if (lm->ants[ant]->room_cur && lm->ants[ant]->room_cur->next)
 	{
-		if (lm->ants[i]->room_cur == NULL)
-			return (i);
-		i++;
+		lm->ants[ant]->room_cur = lm->ants[ant]->room_cur->next;
+		printf("L%i-%s ", lm->ants[ant]->ant_n, ROOM(lm->ants[ant]->room_cur)->name);
+		return (1);
 	}
-	return (-1);
+	return (0);
 }
 
-
-void	ft_lm_ant_move(t_lm *lm, t_lst *route)
+int	ft_lm_ants_move(t_lm *lm)
 {
-	
+	int i;
+	int ant_move;
+
+	i = 0;
+	ant_move = 0;
+	while (i < lm->ants_c)
+	{
+		ant_move += ft_lm_ant_move(lm, i);
+		i++;
+	}
+	return (ant_move);
+}
+
+void	ft_lm_ant_put(t_lm *lm, int ant, t_lst *route)
+{
+	lm->ants[ant]->room_cur = route;
 }
 
 void 	ft_lm_ants_run(t_lm *lm, t_lst *routes)
 {
 	t_lst *route_cur;
 
-	route_cur = routes;
 	while (42)
 	{
-
-		if (ROUTE(route_cur)->ants == 0 || route_cur->next == NULL)
-			route_cur = routes;
+		route_cur = routes;
+		while (route_cur)
+		{
+			if (lm->ants_on_route_c < lm->ants_c)
+			{
+				ft_lm_ant_put(lm, lm->ants_on_route_c, ROUTE(route_cur)->rooms);
+				lm->ants_on_route_c++;
+			}
+			route_cur = route_cur->next;
+		}
+		if (ft_lm_ants_move(lm) == 0)
+			break;
+		printf("\n");
 	}
-
 }
 
 t_ant 	*ft_lm_ant_new(ant_n)

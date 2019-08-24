@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/23 19:29:04 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/24 18:31:22 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_route
 typedef struct		s_lm
 {
 	int				ants_c;
+	int				ants_on_route_c;
 	int				rooms_c;
 	t_ant			**ants;
 	t_room			*rooms[MAX_ROOMS + 1];
@@ -98,6 +99,7 @@ int ft_lm_coment_type(char **line);
 int ft_lm_put_ants(t_lm *lm, t_lst *routes);
 
 t_ant 	**ft_lm_ants_new(t_lm **lm);
+void 	ft_lm_ants_run(t_lm *lm, t_lst *routes);
 
 
 #endif
