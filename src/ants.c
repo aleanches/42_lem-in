@@ -6,93 +6,11 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:45:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/24 18:32:14 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/24 20:53:45 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lem-in.h"
-
-int ft_lm_put_ants(t_lm *lm, t_lst *routes)
-{
-	int ants;
-	int sum;
-	t_lst *begin;
-
-	ants = lm->ants_c;
-	sum = 0;
-	begin = routes;
-	while (ants > 0)
-	{
-		while (begin)
-		{
-			if (sum > ROUTE(begin)->ants + ROUTE(begin)->len)
-			{
-				ants--;
-				ROUTE(begin)->ants++;
-				if (ants == 0)
-					break;
-			}
-			begin = begin->next;
-		}
-		begin = routes;
-		sum++;
-	}
-	return(ROUTE(routes)->ants + ROUTE(routes)->len);
-}
-
-
-int	ft_lm_ant_move(t_lm *lm, int ant)
-{
-	if (lm->ants[ant]->room_cur && lm->ants[ant]->room_cur->next)
-	{
-		lm->ants[ant]->room_cur = lm->ants[ant]->room_cur->next;
-		printf("L%i-%s ", lm->ants[ant]->ant_n, ROOM(lm->ants[ant]->room_cur)->name);
-		return (1);
-	}
-	return (0);
-}
-
-int	ft_lm_ants_move(t_lm *lm)
-{
-	int i;
-	int ant_move;
-
-	i = 0;
-	ant_move = 0;
-	while (i < lm->ants_c)
-	{
-		ant_move += ft_lm_ant_move(lm, i);
-		i++;
-	}
-	return (ant_move);
-}
-
-void	ft_lm_ant_put(t_lm *lm, int ant, t_lst *route)
-{
-	lm->ants[ant]->room_cur = route;
-}
-
-void 	ft_lm_ants_run(t_lm *lm, t_lst *routes)
-{
-	t_lst *route_cur;
-
-	while (42)
-	{
-		route_cur = routes;
-		while (route_cur)
-		{
-			if (lm->ants_on_route_c < lm->ants_c)
-			{
-				ft_lm_ant_put(lm, lm->ants_on_route_c, ROUTE(route_cur)->rooms);
-				lm->ants_on_route_c++;
-			}
-			route_cur = route_cur->next;
-		}
-		if (ft_lm_ants_move(lm) == 0)
-			break;
-		printf("\n");
-	}
-}
 
 t_ant 	*ft_lm_ant_new(ant_n)
 {
@@ -123,4 +41,83 @@ t_ant 	**ft_lm_ants_new(t_lm **lm)
 	return (ants);
 }
 
+int ft_lm_ants_calc_on_routs(t_lm *lm, t_lst *routes)
+{
+	int ants;
+	int sum;
+	t_lst *begin;
 
+	ants = lm->ants_c;
+	sum = 0;
+	begin = routes;
+	while (ants > 0)
+	{
+		while (begin)
+		{
+			if (sum > ROUTE(begin)->ants + ROUTE(begin)->len)
+			{
+				ants--;
+				ROUTE(begin)->ants++;
+				if (ants == 0)
+					break ;
+			}
+			begin = begin->next;
+		}
+		begin = routes;
+		sum++;
+	}
+	return(ROUTE(routes)->ants + ROUTE(routes)->len - 1);
+}
+static void	ft_lm_ants_move_print(t_ant *ant)
+{
+	ft_putchar('L');
+	ft_putnbr(ant->ant_n);
+	ft_putchar('-');
+	ft_putstr(ROOM(ant->room_cur)->name);
+	ft_putchar(' ');
+}
+
+static int	ft_lm_ants_move(t_lm *lm)
+{
+	int i;
+	int ant_move;
+
+	i = 0;
+	ant_move = 0;
+	while (i < lm->ants_c)
+	{
+		if (lm->ants[i]->room_cur && lm->ants[i]->room_cur->next)
+		{
+			lm->ants[i]->room_cur = lm->ants[i]->room_cur->next;
+			ft_lm_ants_move_print(lm->ants[i]);
+			ant_move++;
+		}
+		i++;
+	}
+	return (ant_move);
+}
+
+void 	ft_lm_ants_run(t_lm *lm, t_lst *routes)
+{
+	t_lst *route_cur;
+	int ants_on_route_c;
+
+	ants_on_route_c = 0;
+	while (42)
+	{
+		route_cur = routes;
+		while (route_cur && ROUTE(route_cur)->ants > 0)
+		{
+			if (ants_on_route_c < lm->ants_c)
+			{
+				lm->ants[ants_on_route_c]->room_cur = ROUTE(route_cur)->rooms;
+				ants_on_route_c++;
+				ROUTE(route_cur)->ants--;
+			}
+			route_cur = route_cur->next;
+		}
+		if (ft_lm_ants_move(lm) == 0)
+			break;
+		ft_putchar('\n');
+	}
+}
