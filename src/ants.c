@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ants.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:45:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/24 20:53:45 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/24 22:05:12 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,11 @@ void 	ft_lm_ants_run(t_lm *lm, t_lst *routes)
 	while (42)
 	{
 		route_cur = routes;
-		while (route_cur && ROUTE(route_cur)->ants > 0)
+		while (route_cur && ROUTE(route_cur)->ants > 0 && ants_on_route_c < lm->ants_c)
 		{
-			if (ants_on_route_c < lm->ants_c)
-			{
-				lm->ants[ants_on_route_c]->room_cur = ROUTE(route_cur)->rooms;
-				ants_on_route_c++;
-				ROUTE(route_cur)->ants--;
-			}
+			lm->ants[ants_on_route_c]->room_cur = ROUTE(route_cur)->rooms;
+			ants_on_route_c++;
+			ROUTE(route_cur)->ants--;
 			route_cur = route_cur->next;
 		}
 		if (ft_lm_ants_move(lm) == 0)

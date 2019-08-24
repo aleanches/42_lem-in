@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem-in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/24 20:49:17 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/24 22:29:43 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ int main()
 
 	if ((a = ft_lm_ants_calc_on_routs(lm, lm->routes_a)) <= (b = ft_lm_ants_calc_on_routs(lm, lm->routes_b)))
 	{
-		ft_lm_ants_run(lm, lm->routes_a);
-		printf("-------------%i\n", a + 1);
+		// ft_lm_ants_run(lm, lm->routes_a);
+		printf("-------------%i\n", a);
 		ft_lst_iter(lm->routes_a, ff_print_routes);
 	}
 		
 	else
 	{
-		ft_lm_ants_run(lm, lm->routes_b);
-		printf("-------------%i\n", b + 1);
+		// ft_lm_ants_run(lm, lm->routes_b);
+		printf("-------------%i\n", b);
 		ft_lst_iter(lm->routes_b, ff_print_routes);
 	}
 		

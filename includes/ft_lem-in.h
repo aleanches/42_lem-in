@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lem-in.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/24 20:03:53 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/24 22:54:27 by Alexandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 
 # define MAX_ROOMS 15000
+# define MAX_ROUTE_LEN 100
 # define ROOM(R) ((t_room*)(R->data))
 # define ROUTE(R) ((t_route*)R->data)
 
