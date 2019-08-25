@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 21:19:10 by vsanta            #+#    #+#             */
-/*   Updated: 2019/07/31 15:55:08 by Alexandr         ###   ########.fr       */
+/*   Created: 2019/08/25 19:21:31 by vsanta            #+#    #+#             */
+/*   Updated: 2019/08/25 19:23:22 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_lst	*ft_lst_new(void *data)
 {
 	t_lst *new;
-	
+
 	if ((new = (t_lst*)malloc(sizeof(t_lst*))) == NULL)
 		return (NULL);
 	new->data = data;

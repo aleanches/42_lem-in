@@ -6,13 +6,13 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:45:48 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/23 19:05:20 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/25 20:28:20 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lem-in.h"
+#include "ft_lem_in.h"
 
-static char *ft_lm_mtx_row_new(int size, char def_val)
+static char	*ft_lm_mtx_row_new(int size, char def_val)
 {
 	char	*row;
 
@@ -23,7 +23,7 @@ static char *ft_lm_mtx_row_new(int size, char def_val)
 	return (row);
 }
 
-char **ft_lm_mtx_new(int size, char def_val)
+char		**ft_lm_mtx_new(int size, char def_val)
 {
 	int		i;
 	char	**col;

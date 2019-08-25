@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/07 19:44:34 by Alexandr          #+#    #+#             */
-/*   Updated: 2019/08/08 14:49:39 by vsanta           ###   ########.fr       */
+/*   Created: 2019/08/25 19:27:38 by vsanta            #+#    #+#             */
+/*   Updated: 2019/08/25 19:27:49 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_str_free(char **str, int ret_val)
+int		ft_str_free(char **str, int ret_val)
 {
 	if (str && (*str))
 	{

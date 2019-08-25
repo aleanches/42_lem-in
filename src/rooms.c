@@ -6,16 +6,16 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:45:52 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/24 17:22:47 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/25 20:28:37 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lem-in.h"
+#include "ft_lem_in.h"
 
-int ft_lm_get_room_by_name(t_lm *lm, char *name)
+int		ft_lm_room_find_by_name(t_lm *lm, char *name)
 {
 	int i;
-	
+
 	i = 0;
 	while (lm->rooms[i])
 	{
@@ -26,7 +26,7 @@ int ft_lm_get_room_by_name(t_lm *lm, char *name)
 	return (-1);
 }
 
-int ft_lm_find_room_by_i(t_lst *st, int i)
+int		ft_lm_room_find_by_i(t_lst *st, int i)
 {
 	while (st)
 	{
@@ -37,7 +37,7 @@ int ft_lm_find_room_by_i(t_lst *st, int i)
 	return (-1);
 }
 
-t_room	*ft_lm_new_room(char **tmp)
+t_room	*ft_lm_room_new(char **tmp)
 {
 	t_room	*new;
 	int		cord_x;
@@ -60,9 +60,11 @@ t_room	*ft_lm_new_room(char **tmp)
 	return (new);
 }
 
-t_room	*ft_lm_add_new_room(t_lm **lm, t_room *room)
+t_room	*ft_lm_room_add_new(t_lm **lm, t_room *room)
 {
 	if ((*lm)->rooms_c >= MAX_ROOMS)
 		ft_lm_put_error(lm, 1);
-	return ((*lm)->rooms[room->i = (*lm)->rooms_c++] = room);
+	room->i = (*lm)->rooms_c++;
+	(*lm)->rooms[room->i] = room;
+	return ((*lm)->rooms[room->i]);
 }

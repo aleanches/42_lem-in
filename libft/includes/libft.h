@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 17:11:24 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/19 16:33:02 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/25 19:31:31 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void					*ft_lst_pop_front_data(t_lst **lst);
 t_lst					*ft_lst_push_back_data(t_lst **lst, void *data);
 t_lst					*ft_lst_push_front_data(t_lst **lst, void *data);
 
-void					***ft_mtx_new(unsigned int size, void *(*f)(unsigned x, unsigned y));
+void					***ft_mtx_new(unsigned int size,
+						void *(*f)(unsigned x, unsigned y));
 void					ft_mtx_free(void ****mtx, void (*f)(void **data));
 
 void					ft_bzero(void *s, size_t n);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_pop_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Alexandr <Alexandr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 21:18:39 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/01 17:37:34 by Alexandr         ###   ########.fr       */
+/*   Created: 2019/08/25 19:21:45 by vsanta            #+#    #+#             */
+/*   Updated: 2019/08/25 19:23:38 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_lst	*ft_lst_pop_back(t_lst **lst)
 	{
 		last = *lst;
 		*lst = NULL;
-		return(last);
+		return (last);
 	}
 	pre_last = *lst;
 	while (pre_last->next && pre_last->next->next)
 		pre_last = pre_last->next;
 	last = pre_last->next;
 	pre_last->next = NULL;
-	return(last);
+	return (last);
 }
