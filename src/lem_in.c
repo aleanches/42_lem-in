@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/25 20:28:18 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/26 18:10:37 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			main(void)
 
 	ft_lm_init(&lm);
 	ft_lm_parse_input(&lm);
-	if (lm->input == NULL)
+	if (lm->input == NULL || lm->mtx == NULL || lm->rooms_c == 0)
 		ft_lm_put_error(&lm, 1);
 	if (ft_lm_routes_set(lm) == 0)
 		ft_lm_put_error(&lm, 1);

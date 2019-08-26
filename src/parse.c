@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:43:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/25 20:28:33 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/26 18:12:48 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		ft_lm_add_ants(char **line, t_lm **lm)
 	if ((*line)[0] && (*line)[0] == '#')
 		return (10);
 	count = ft_atoi((*line));
-	if (count == 0 || ft_is_valid_int(count, (*line)) == 0)
+	if (count < 1 || ft_is_valid_int(count, (*line)) == 0)
 		ft_lm_put_error(lm, 10);
 	(*lm)->ants_c = count;
 	(*lm)->ants = ft_lm_ants_new(lm);

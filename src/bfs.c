@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 14:37:09 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/25 20:28:08 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/08/26 18:13:21 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_lm_bfs_push_next_nodes(t_lm *lm, int no_vis,
 										t_lst **st, t_room *room)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (lm->mtx[room->i][i])
@@ -26,6 +26,17 @@ static void	ft_lm_bfs_push_next_nodes(t_lm *lm, int no_vis,
 			ft_lst_push_front_data(st, (void*)(lm->rooms[i]));
 		i++;
 	}
+}
+
+static int	ft_lm_bfs_check_last(t_lst **st_cur, t_lst **st_next, int dist)
+{
+	if (*st_cur == NULL)
+	{
+		*st_cur = *st_next;
+		*st_next = NULL;
+		return (dist + 1);
+	}
+	return (dist);
 }
 
 int			ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
@@ -51,12 +62,7 @@ int			ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
 		}
 		if (room_cur->i == end->i)
 			return (ft_lm_free_route(&st_cur, ft_lm_free_route(&st_next, 1)));
-		if (st_cur == NULL)
-		{
-			st_cur = st_next;
-			st_next = NULL;
-			dist++;
-		}
+		dist = ft_lm_bfs_check_last(&st_cur, &st_next, dist);
 	}
 	return (0);
 }
