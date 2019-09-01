@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 20:14:43 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/26 18:10:37 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/09/01 13:27:36 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		ft_lm_init(t_lm **lm)
 		ft_lm_put_error(lm, 1);
 	(*lm)->ants_c = 0;
 	(*lm)->rooms_c = 0;
+	(*lm)->con_c = 0;
 	(*lm)->ants = NULL;
 	ft_bzero((void*)(*lm)->rooms, sizeof(t_room*) * (MAX_ROOMS + 1));
 	(*lm)->room_start = NULL;

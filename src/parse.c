@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:43:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/26 18:12:48 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/09/01 13:28:30 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				ft_lm_add_con(char **line, t_lm **lm)
 		ft_lm_put_error(lm, ft_array_free(&tmp, 30));
 	(*lm)->mtx[from][to] = '+';
 	(*lm)->mtx[to][from] = '+';
+	(*lm)->con_c++;
 	return (ft_array_free(&tmp, 30));
 }
 

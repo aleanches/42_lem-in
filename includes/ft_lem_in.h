@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 20:05:30 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/25 20:27:46 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/09/01 13:29:49 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_lm
 {
 	int				ants_c;
 	int				rooms_c;
+	int				con_c;
 	t_ant			**ants;
 	t_room			*rooms[MAX_ROOMS + 1];
 	t_room			*room_start;
