@@ -1,2 +1,0 @@
-./generator.dms --big-superposition > map5
-time ./test < map5 | grep "L" | wc -l

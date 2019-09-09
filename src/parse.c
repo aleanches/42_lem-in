@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:43:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/09/01 13:28:30 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/09/07 13:31:35 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int				ft_lm_add_con(char **line, t_lm **lm)
 		return (30);
 	if ((tmp = ft_strsplit((*line), '-')) == NULL || ft_array_len(tmp) != 2)
 		ft_lm_put_error(lm, ft_array_free(&tmp, 30));
-	if ((from = ft_lm_room_find_by_name(*lm, tmp[0])) == -1 ||
-		(to = ft_lm_room_find_by_name(*lm, tmp[1])) == -1)
+	from = ft_lm_room_find_by_name(*lm, tmp[0]);
+	to = ft_lm_room_find_by_name(*lm, tmp[1]);
+	if (from == -1 || to == -1)
 		ft_lm_put_error(lm, ft_array_free(&tmp, 30));
 	(*lm)->mtx[from][to] = '+';
 	(*lm)->mtx[to][from] = '+';

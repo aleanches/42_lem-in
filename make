@@ -1,1 +1,0 @@
-gcc src/*.c libft/libft.a -I includes/ -I libft/includes/ -g -o test

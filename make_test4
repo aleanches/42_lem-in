@@ -1,2 +1,0 @@
-./generator.dms --big > map4
-time ./test < map4 | grep "L" | wc -l

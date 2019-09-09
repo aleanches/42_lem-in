@@ -1,2 +1,0 @@
-./generator.dms --flow-one > map1
-time ./test < map1 | grep "L" | wc -l

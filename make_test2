@@ -1,2 +1,0 @@
-./generator.dms --flow-ten > map2
-time ./test < map2 | grep "L" | wc -l
