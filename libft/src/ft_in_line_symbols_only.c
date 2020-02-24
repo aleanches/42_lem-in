@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_free.c                                      :+:      :+:    :+:   */
+/*   ft_in_line_symbols_only.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/25 19:27:38 by vsanta            #+#    #+#             */
-/*   Updated: 2019/11/20 18:31:15 by vsanta           ###   ########.fr       */
+/*   Created: 2019/09/26 15:44:19 by vsanta            #+#    #+#             */
+/*   Updated: 2019/11/10 18:22:18 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_str_free(char **str, int ret_val)
+int	ft_in_line_symbols_only(char *line, int n, char *symbols_only)
 {
-	if (str && (*str))
+	int i;
+
+	i = 0;
+	while (line[i] && i < n)
 	{
-		free(*str);
-		*str = NULL;
+		if (ft_strchr(symbols_only, line[i]) == NULL)
+			return (0);
+		i++;
 	}
-	return (ret_val);
+	return (1);
 }

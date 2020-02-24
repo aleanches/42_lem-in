@@ -6,7 +6,7 @@
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:05:42 by vsanta            #+#    #+#             */
-/*   Updated: 2019/08/25 19:29:02 by vsanta           ###   ########.fr       */
+/*   Updated: 2019/09/26 19:03:42 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static	int		ft_to_line(char **line, char **tmp, int ret)
 {
 	char	*tmp_b;
+	char	last;
 	int		n_ind;
 
 	n_ind = 0;
 	while ((*tmp)[n_ind] != '\0' && (*tmp)[n_ind] != '\n')
 		n_ind++;
+	last = (*tmp)[n_ind] == '\n' ? 1 : 2;
 	if ((*tmp)[0] == '\0' && ret == 0)
 	{
 		ft_strdel(tmp);
@@ -31,7 +33,7 @@ static	int		ft_to_line(char **line, char **tmp, int ret)
 		return (-1);
 	free(*tmp);
 	*tmp = tmp_b;
-	return (1);
+	return (last);
 }
 
 static	int		ft_free_tmpfd(char **tmp)
