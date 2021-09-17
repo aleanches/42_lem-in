@@ -12,7 +12,7 @@
 
 #include "ft_lem_in.h"
 
-int		ft_lm_coment_type(char **line)
+int		coment_type(char **line)
 {
 	if ((*line)[0] && (*line)[0] == '#' &&
 			ft_strcmp((*line), "##start") == 0)
@@ -25,11 +25,11 @@ int		ft_lm_coment_type(char **line)
 	return (0);
 }
 
-int		ft_lm_is_not_room(int action, char **line, t_lm **lm)
+int		is_not_room(int action, char **line, t_lm **lm)
 {
 	if ((*lm)->room_start == NULL || (*lm)->room_end == NULL)
-		ft_lm_put_error(lm, action);
-	if (((*lm)->mtx = ft_lm_mtx_new((*lm)->rooms_c, '-')) == NULL)
-		ft_lm_put_error(lm, action);
-	return (ft_lm_add_con(line, lm));
+		put_error(lm, action);
+	if (((*lm)->mtx = mtx_new((*lm)->rooms_c, '-')) == NULL)
+		put_error(lm, action);
+	return (add_con(line, lm));
 }

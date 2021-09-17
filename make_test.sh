@@ -27,15 +27,17 @@ else
 	exit
 fi
 
-echo "\nmap: $map"
+echo "map: $map"
 ./generator.dms --$map > $map
-time your=$(../lem-in < $map | grep "L" | wc -l | awk '{ gsub (" ", "", $0); print}')
+time your=$(./lem-in < $map | grep "L" | wc -l | awk '{ gsub (" ", "", $0); print}')
 required=$(cat $map | grep "#Here is the number of lines required:" |
 head -1 | awk '{ gsub ("#Here is the number of lines required: ", "", $0); print}')
 
 if (("$your" <= "$required"))
 then
-	echo "\n✅  your result = $your | required result = $required\n"
+  rm $map
+	echo "✅  your result = $your | required result = $required"
 else
-	echo "\n⭕️  your result = $your | required result = $required | difference = $(($your - $required))\n"
+  rm $map
+	echo "⭕️  your result = $your | required result = $required | difference = $(($your - $required))"
 fi

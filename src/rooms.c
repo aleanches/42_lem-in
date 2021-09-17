@@ -12,7 +12,7 @@
 
 #include "ft_lem_in.h"
 
-int		ft_lm_room_find_by_name(t_lm *lm, char *name)
+int		room_find_by_name(t_lm *lm, char *name)
 {
 	int i;
 
@@ -26,7 +26,7 @@ int		ft_lm_room_find_by_name(t_lm *lm, char *name)
 	return (-1);
 }
 
-int		ft_lm_room_find_by_i(t_lst *st, int i)
+int		room_find_by_i(t_lst *st, int i)
 {
 	while (st)
 	{
@@ -37,7 +37,7 @@ int		ft_lm_room_find_by_i(t_lst *st, int i)
 	return (-1);
 }
 
-t_room	*ft_lm_room_new(char **tmp)
+t_room	*room_new(char **tmp)
 {
 	t_room	*new;
 	int		cord_x;
@@ -60,10 +60,10 @@ t_room	*ft_lm_room_new(char **tmp)
 	return (new);
 }
 
-t_room	*ft_lm_room_add_new(t_lm **lm, t_room *room)
+t_room	*room_add_new(t_lm **lm, t_room *room)
 {
 	if ((*lm)->rooms_c >= MAX_ROOMS)
-		ft_lm_put_error(lm, 1);
+		put_error(lm, 1);
 	room->i = (*lm)->rooms_c++;
 	(*lm)->rooms[room->i] = room;
 	return ((*lm)->rooms[room->i]);

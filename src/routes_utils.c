@@ -12,7 +12,7 @@
 
 #include "ft_lem_in.h"
 
-void	ft_lm_set_def(t_lm *lm, int vis, int bfs, int dist)
+void	set_def(t_lm *lm, int vis, int bfs, int dist)
 {
 	int i;
 
@@ -29,7 +29,7 @@ void	ft_lm_set_def(t_lm *lm, int vis, int bfs, int dist)
 	}
 }
 
-void	ft_lm_route_s_e_set(t_lm *lm, t_lst *rooms, char c)
+void	route_s_e_set(t_lm *lm, t_lst *rooms, char c)
 {
 	while (rooms && rooms->next)
 	{
@@ -38,16 +38,16 @@ void	ft_lm_route_s_e_set(t_lm *lm, t_lst *rooms, char c)
 	}
 }
 
-void	ft_lm_routes_s_e_open(t_lm *lm, t_lst *routes)
+void	routes_s_e_open(t_lm *lm, t_lst *routes)
 {
 	while (routes)
 	{
-		ft_lm_route_s_e_set(lm, ((t_route*)(routes->data))->rooms, '+');
+		route_s_e_set(lm, ((t_route*)(routes->data))->rooms, '+');
 		routes = routes->next;
 	}
 }
 
-void	ft_lm_close_cross(t_lm *lm)
+void	close_cross(t_lm *lm)
 {
 	int i;
 	int j;

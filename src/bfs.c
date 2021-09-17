@@ -12,7 +12,7 @@
 
 #include "ft_lem_in.h"
 
-static void	ft_lm_bfs_push_next_nodes(t_lm *lm, int no_vis,
+static void	bfs_push_next_nodes(t_lm *lm, int no_vis,
 										t_lst **st, t_room *room)
 {
 	int		i;
@@ -22,13 +22,13 @@ static void	ft_lm_bfs_push_next_nodes(t_lm *lm, int no_vis,
 	{
 		if (lm->mtx[room->i][i] == '+' && lm->rooms[i]->bfs == -1 &&
 			(no_vis ? lm->rooms[i]->vis == -1 : 1) &&
-			ft_lm_room_find_by_i(*st, i) == -1)
+			room_find_by_i(*st, i) == -1)
 			ft_lst_push_front_data(st, (void*)(lm->rooms[i]));
 		i++;
 	}
 }
 
-static int	ft_lm_bfs_check_last(t_lst **st_cur, t_lst **st_next, int dist)
+static int	bfs_check_last(t_lst **st_cur, t_lst **st_next, int dist)
 {
 	if (*st_cur == NULL)
 	{
@@ -39,7 +39,7 @@ static int	ft_lm_bfs_check_last(t_lst **st_cur, t_lst **st_next, int dist)
 	return (dist);
 }
 
-int			ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
+int			bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
 {
 	t_lst	*st_cur;
 	t_lst	*st_next;
@@ -49,7 +49,7 @@ int			ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
 	st_cur = NULL;
 	st_next = NULL;
 	room_cur = NULL;
-	ft_lm_set_def(lm, dist = 0, 1, 1);
+	set_def(lm, dist = 0, 1, 1);
 	ft_lst_push_front_data(&st_cur, (void*)start);
 	while (st_cur)
 	{
@@ -58,11 +58,11 @@ int			ft_lm_bfs(t_lm *lm, int no_vis, t_room *start, t_room *end)
 		{
 			room_cur->bfs = 1;
 			room_cur->dist = dist;
-			ft_lm_bfs_push_next_nodes(lm, no_vis, &st_next, room_cur);
+			bfs_push_next_nodes(lm, no_vis, &st_next, room_cur);
 		}
 		if (room_cur->i == end->i)
-			return (ft_lm_free_route(&st_cur, ft_lm_free_route(&st_next, 1)));
-		dist = ft_lm_bfs_check_last(&st_cur, &st_next, dist);
+			return (free_route(&st_cur, free_route(&st_next, 1)));
+		dist = bfs_check_last(&st_cur, &st_next, dist);
 	}
 	return (0);
 }

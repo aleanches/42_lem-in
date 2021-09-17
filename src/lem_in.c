@@ -12,10 +12,10 @@
 
 #include "ft_lem_in.h"
 
-void		ft_lm_init(t_lm **lm)
+void		init(t_lm **lm)
 {
 	if (((*lm) = (t_lm*)malloc(sizeof(t_lm))) == NULL)
-		ft_lm_put_error(lm, 1);
+		put_error(lm, 1);
 	(*lm)->ants_c = 0;
 	(*lm)->rooms_c = 0;
 	(*lm)->con_c = 0;
@@ -29,28 +29,28 @@ void		ft_lm_init(t_lm **lm)
 	(*lm)->input = NULL;
 }
 
-static int	ft_lm_free(t_lm **lm, int ret_val)
+static int	lm_free(t_lm **lm, int ret_val)
 {
 	if (*lm == NULL)
 		return (ret_val);
-	ft_lm_free_ants((*lm)->ants);
-	ft_lm_free_rooms((*lm)->rooms);
+	free_ants((*lm)->ants);
+	free_rooms((*lm)->rooms);
 	ft_array_free(&((*lm)->mtx), 0);
-	ft_lm_free_routes(&(*lm)->routes_a, 0);
-	ft_lm_free_routes(&(*lm)->routes_b, 0);
-	ft_lm_free_input(&(*lm)->input, 0);
+	free_routes(&(*lm)->routes_a, 0);
+	free_routes(&(*lm)->routes_b, 0);
+	free_input(&(*lm)->input, 0);
 	free(*lm);
 	(*lm) = NULL;
 	return (ret_val);
 }
 
-void		ft_lm_put_error(t_lm **lm, int ret_val)
+void		put_error(t_lm **lm, int ret_val)
 {
 	ft_putstr("ERROR\n");
-	exit(ft_lm_free(lm, ret_val));
+	exit(lm_free(lm, ret_val));
 }
 
-static void	ft_lm_input_print(t_lm *lm)
+static void	input_print(t_lm *lm)
 {
 	t_lst *begin;
 
@@ -68,17 +68,17 @@ int			main(void)
 {
 	t_lm *lm;
 
-	ft_lm_init(&lm);
-	ft_lm_parse_input(&lm);
+	init(&lm);
+	parse_input(&lm);
 	if (lm->input == NULL || lm->mtx == NULL || lm->rooms_c == 0)
-		ft_lm_put_error(&lm, 1);
-	if (ft_lm_routes_set(lm) == 0)
-		ft_lm_put_error(&lm, 1);
-	ft_lm_input_print(lm);
-	if (ft_lm_ants_calc_on_routs(lm, lm->routes_a) <=
-		ft_lm_ants_calc_on_routs(lm, lm->routes_b))
-		ft_lm_ants_run(lm, lm->routes_a);
+		put_error(&lm, 1);
+	if (routes_set(lm) == 0)
+		put_error(&lm, 1);
+	input_print(lm);
+	if (ants_calc_on_routs(lm, lm->routes_a) <=
+		ants_calc_on_routs(lm, lm->routes_b))
+		ants_run(lm, lm->routes_a);
 	else
-		ft_lm_ants_run(lm, lm->routes_b);
-	return (ft_lm_free(&lm, 0));
+		ants_run(lm, lm->routes_b);
+	return (lm_free(&lm, 0));
 }

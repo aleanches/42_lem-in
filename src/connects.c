@@ -12,7 +12,7 @@
 
 #include "ft_lem_in.h"
 
-static char	*ft_lm_mtx_row_new(int size, char def_val)
+static char	*mtx_row_new(int size, char def_val)
 {
 	char	*row;
 
@@ -23,7 +23,7 @@ static char	*ft_lm_mtx_row_new(int size, char def_val)
 	return (row);
 }
 
-char		**ft_lm_mtx_new(int size, char def_val)
+char		**mtx_new(int size, char def_val)
 {
 	int		i;
 	char	**col;
@@ -32,7 +32,7 @@ char		**ft_lm_mtx_new(int size, char def_val)
 	col = (char**)malloc(sizeof(char*) * (size + 1));
 	while (i < size)
 	{
-		if ((col[i] = ft_lm_mtx_row_new(size, def_val)) == NULL)
+		if ((col[i] = mtx_row_new(size, def_val)) == NULL)
 			return ((char**)(long int)ft_array_free(&col, 0));
 		i++;
 	}

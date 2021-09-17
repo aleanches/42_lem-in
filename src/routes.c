@@ -12,7 +12,7 @@
 
 #include "ft_lem_in.h"
 
-static int		ft_lm_get_opt_rev(t_lm *lm, t_room *from_room)
+static int		get_opt_rev(t_lm *lm, t_room *from_room)
 {
 	int		i;
 	t_room	*opt_room;
@@ -29,13 +29,13 @@ static int		ft_lm_get_opt_rev(t_lm *lm, t_room *from_room)
 	return (opt_room->i == from_room->i ? -1 : opt_room->i);
 }
 
-static t_route	*ft_lm_route_get(t_lm *lm, t_room *start, t_room *end)
+static t_route	*route_get(t_lm *lm, t_room *start, t_room *end)
 {
 	t_route *route;
 	t_room	*room_cur;
 	int		next_i;
 
-	if (ft_lm_get_opt_rev(lm, end) == -1 ||
+	if (get_opt_rev(lm, end) == -1 ||
 		(route = (t_route*)malloc(sizeof(t_route))) == NULL)
 		return (NULL);
 	route->ants = 0;
@@ -44,7 +44,7 @@ static t_route	*ft_lm_route_get(t_lm *lm, t_room *start, t_room *end)
 	room_cur = end;
 	while (room_cur->i != start->i)
 	{
-		next_i = ft_lm_get_opt_rev(lm, room_cur);
+		next_i = get_opt_rev(lm, room_cur);
 		if (room_cur->i != start->i && room_cur->i != end->i)
 			room_cur->vis = room_cur->vis == -1 ? 1 : room_cur->vis + 1;
 		ft_lst_push_front_data(&route->rooms,
@@ -55,7 +55,7 @@ static t_route	*ft_lm_route_get(t_lm *lm, t_room *start, t_room *end)
 	return (route);
 }
 
-static t_lst	*ft_lm_routes_get(t_lm *lm, int no_vis, int close_rev)
+static t_lst	*routes_get(t_lm *lm, int no_vis, int close_rev)
 {
 	t_lst		*routes;
 	t_route		*route_cur;
@@ -67,9 +67,9 @@ static t_lst	*ft_lm_routes_get(t_lm *lm, int no_vis, int close_rev)
 	while (42)
 	{
 		if (route_cur && close_rev)
-			ft_lm_route_s_e_set(lm, route_cur->rooms, '-');
-		ft_lm_bfs(lm, no_vis, lm->room_start, lm->room_end);
-		route_cur = ft_lm_route_get(lm, lm->room_start, lm->room_end);
+			route_s_e_set(lm, route_cur->rooms, '-');
+		bfs(lm, no_vis, lm->room_start, lm->room_end);
+		route_cur = route_get(lm, lm->room_start, lm->room_end);
 		ft_lst_push_back_data(&routes, (void*)route_cur);
 		if (route_cur == NULL || route_cur->len == 1 ||
 			(route_cur->len > MAX_ROUTE_LEN || routes_c >= MAX_ROUTES_C))
@@ -78,19 +78,19 @@ static t_lst	*ft_lm_routes_get(t_lm *lm, int no_vis, int close_rev)
 	return (routes);
 }
 
-int				ft_lm_routes_set(t_lm *lm)
+int				routes_set(t_lm *lm)
 {
 	t_lst *tmp_routes;
 
 	tmp_routes = NULL;
-	lm->routes_a = ft_lm_routes_get(lm, 1, 0);
-	ft_lm_set_def(lm, 1, 1, 1);
-	tmp_routes = ft_lm_routes_get(lm, 0, 1);
-	ft_lm_routes_s_e_open(lm, tmp_routes);
-	ft_lm_free_routes(&tmp_routes, 0);
-	ft_lm_close_cross(lm);
-	ft_lm_set_def(lm, 1, 0, 0);
-	lm->routes_b = ft_lm_routes_get(lm, 1, 0);
+	lm->routes_a = routes_get(lm, 1, 0);
+	set_def(lm, 1, 1, 1);
+	tmp_routes = routes_get(lm, 0, 1);
+	routes_s_e_open(lm, tmp_routes);
+	free_routes(&tmp_routes, 0);
+	close_cross(lm);
+	set_def(lm, 1, 0, 0);
+	lm->routes_b = routes_get(lm, 1, 0);
 	if (lm->routes_a == NULL && lm->routes_b == NULL)
 		return (0);
 	return (1);

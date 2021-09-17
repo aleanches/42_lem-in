@@ -12,19 +12,19 @@
 
 #include "ft_lem_in.h"
 
-t_ant			**ft_lm_ants_new(t_lm **lm)
+t_ant			**ants_new(t_lm **lm)
 {
 	int		i;
 	t_ant	**ants;
 
 	i = 0;
 	if ((ants = (t_ant**)malloc(sizeof(t_ant) * ((*lm)->ants_c + 1))) == NULL)
-		ft_lm_put_error(lm, 1);
+		put_error(lm, 1);
 	ants[(*lm)->ants_c] = NULL;
 	while (i < (*lm)->ants_c)
 	{
 		if ((ants[i] = (t_ant*)malloc(sizeof(t_ant))) == NULL)
-			ft_lm_put_error(lm, 1);
+			put_error(lm, 1);
 		ants[i]->ant_n = i + 1;
 		ants[i]->room_cur = NULL;
 		i++;
@@ -32,7 +32,7 @@ t_ant			**ft_lm_ants_new(t_lm **lm)
 	return (ants);
 }
 
-int				ft_lm_ants_calc_on_routs(t_lm *lm, t_lst *routes)
+int				ants_calc_on_routs(t_lm *lm, t_lst *routes)
 {
 	int		ants;
 	int		sum;
@@ -60,7 +60,7 @@ int				ft_lm_ants_calc_on_routs(t_lm *lm, t_lst *routes)
 	return (ROUTE(routes)->ants + ROUTE(routes)->len - 1);
 }
 
-static void		ft_lm_ants_move_print(t_ant *ant)
+static void		ants_move_print(t_ant *ant)
 {
 	ft_putchar('L');
 	ft_putnbr(ant->ant_n);
@@ -69,7 +69,7 @@ static void		ft_lm_ants_move_print(t_ant *ant)
 	ft_putchar(' ');
 }
 
-static int		ft_lm_ants_move(t_lm *lm)
+static int		ants_move(t_lm *lm)
 {
 	int i;
 	int ant_move;
@@ -81,7 +81,7 @@ static int		ft_lm_ants_move(t_lm *lm)
 		if (lm->ants[i]->room_cur && lm->ants[i]->room_cur->next)
 		{
 			lm->ants[i]->room_cur = lm->ants[i]->room_cur->next;
-			ft_lm_ants_move_print(lm->ants[i]);
+			ants_move_print(lm->ants[i]);
 			ant_move++;
 		}
 		i++;
@@ -89,7 +89,7 @@ static int		ft_lm_ants_move(t_lm *lm)
 	return (ant_move);
 }
 
-void			ft_lm_ants_run(t_lm *lm, t_lst *routes)
+void			ants_run(t_lm *lm, t_lst *routes)
 {
 	t_lst	*route_cur;
 	int		ants_on_routes_c;
@@ -106,7 +106,7 @@ void			ft_lm_ants_run(t_lm *lm, t_lst *routes)
 			ROUTE(route_cur)->ants--;
 			route_cur = route_cur->next;
 		}
-		if (ft_lm_ants_move(lm) == 0)
+		if (ants_move(lm) == 0)
 			break ;
 		ft_putchar('\n');
 	}
